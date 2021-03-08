@@ -42,6 +42,18 @@ namespace Acme.Biz.Tests
             Assert.AreEqual(expected, actual);
         }
 
-
+        [TestMethod()]
+        public void CalculateSuggestedPriceTest()
+        {
+            //Arrange
+            var currentProduct = new Product(1, "Saw", "");
+            currentProduct.Cost = 50m;
+            var expected = 55m;
+            //act
+            var actual = currentProduct.CalculateSuggestedPrice(10m);
+            //Assert
+            Assert.AreEqual(expected, actual);
+            //  Assert.Fail();
+        }
     }
 }
