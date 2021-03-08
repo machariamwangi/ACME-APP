@@ -64,7 +64,7 @@ namespace Acme.Biz.Tests
             //Arrage
             var vendor = new Vendor();
             var product = new Product(1, "Saw", "");
-            var expected = new OperationResult(true, "Order from Acme, Inc\r\nProduct: Saw\r\nQuantity: 12");
+            var expected = new OperationResult(true, "Order from Acme, Inc\r\nProduct: Saw\r\nQuantity: 12" + "\r\nInstructions: standard delivery");
             //act
             var actual = vendor.PlaceOrder(product, 12);
             //ASSERT
@@ -72,6 +72,27 @@ namespace Acme.Biz.Tests
             Assert.AreEqual(expected.Message, actual.Message);
 
             //Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod()]
+        public void placeOrderTest_WithAdress()
+        {
+            //Arrage
+            var vendor = new Vendor();
+            var product = new Product(1, "Saw", "");
+            var expected = new OperationResult(true, "Test With Address");
+
+            //act
+            var actual = vendor.placeOrder(
+                product,
+                quantity: 12,
+                Vendor.IncludeAddress.Yes,
+                Vendor.SendCopy.No
+                );
+            //assert
+            Assert.AreEqual(expected.Success, actual.Success);
+            Assert.AreEqual(expected.Message, actual.Message);
+            //Assert.Fail();
         }
     }
 }
